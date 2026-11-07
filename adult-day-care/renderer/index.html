@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'">
+  <title>Adult Day Care</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="side-head">
+        <h1>Adult Day Care</h1>
+        <button type="button" id="new" class="primary">New patient</button>
+      </div>
+
+      <div class="side-controls">
+        <label class="sr-only" for="search">Search patients</label>
+        <input id="search" type="search" placeholder="Search by name, phone or email">
+        <label for="sort">Sort by</label>
+        <select id="sort">
+          <option value="lastAsc">Last name, A to Z</option>
+          <option value="lastDesc">Last name, Z to A</option>
+          <option value="firstAsc">First name, A to Z</option>
+          <option value="oldest">Age, oldest first</option>
+          <option value="youngest">Age, youngest first</option>
+          <option value="updated">Recently updated</option>
+          <option value="added">Recently added</option>
+        </select>
+        <p id="count" class="count" aria-live="polite"></p>
+      </div>
+
+      <ul id="patient-list" class="patient-list"></ul>
+
+      <div class="side-foot">
+        <button type="button" id="backup">Back up data</button>
+        <button type="button" id="restore">Restore backup</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div id="empty" class="empty-state">
+        <h2>No patient selected</h2>
+        <p>Choose a patient from the list, or add a new one.</p>
+      </div>
+
+      <form id="editor" hidden>
+        <header class="toolbar">
+          <div>
+            <h2 id="title"></h2>
+            <p class="meta"><span id="updated"></span> <span id="dirty" class="dirty" hidden>Unsaved changes</span></p>
+          </div>
+          <div class="actions">
+            <button type="submit" class="primary">Save</button>
+            <button type="button" id="print">Print</button>
+            <button type="button" id="pdf">Save as PDF</button>
+            <button type="button" id="delete" class="danger">Delete</button>
+          </div>
+        </header>
+
+        <div class="sections">
+          <section>
+            <h3>Personal details</h3>
+            <div class="grid">
+              <label>First name <input name="firstName" required></label>
+              <label>Last name <input name="lastName" required></label>
+              <label>Date of birth <input name="dob" type="date"></label>
+            </div>
+          </section>
+
+          <section>
+            <h3>Contact information</h3>
+            <div class="grid">
+              <label>Phone <input name="phone" type="tel"></label>
+              <label>Email <input name="email" type="email"></label>
+              <label class="wide">Address <textarea name="address" rows="2"></textarea></label>
+            </div>
+          </section>
+
+          <section>
+            <h3>Emergency contact</h3>
+            <div class="grid">
+              <label>Name <input name="ecName"></label>
+              <label>Relationship <input name="ecRelationship"></label>
+              <label>Phone <input name="ecPhone" type="tel"></label>
+            </div>
+          </section>
+
+          <section>
+            <h3>Allergies</h3>
+            <div class="rows" data-list="allergies"></div>
+            <button type="button" class="add" data-add="allergies">Add allergy</button>
+          </section>
+
+          <section>
+            <h3>Medications</h3>
+            <div class="rows" data-list="medications"></div>
+            <button type="button" class="add" data-add="medications">Add medication</button>
+          </section>
+
+          <section>
+            <h3>Medical history</h3>
+            <label class="sr-only" for="history">Medical history</label>
+            <textarea id="history" name="history" rows="5" placeholder="Diagnoses, surgeries, conditions, care needs"></textarea>
+          </section>
+
+          <section>
+            <h3>History log</h3>
+            <div class="rows" data-list="log"></div>
+            <button type="button" class="add" data-add="log">Add log entry</button>
+          </section>
+        </div>
+      </form>
+
+      <p id="status" class="status" role="status"></p>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

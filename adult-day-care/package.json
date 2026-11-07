@@ -1,0 +1,38 @@
+{
+  "name": "adult-day-care",
+  "version": "1.0.0",
+  "description": "Patient records for an adult day care, stored locally",
+  "main": "main.js",
+  "author": "Your Name",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "test": "node test/record-html.test.js",
+    "dist": "electron-builder --mac",
+    "dist:win": "electron-builder --win --x64"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.example.adultdaycare",
+    "productName": "Adult Day Care",
+    "files": ["main.js", "preload.js", "record-html.js", "renderer/**/*"],
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.medical"
+    },
+    "win": {
+      "target": [{ "target": "nsis", "arch": ["x64"] }],
+      "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}
